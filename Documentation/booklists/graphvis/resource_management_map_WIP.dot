@@ -1,0 +1,67 @@
+digraph Gesturalism {
+    // Graph Settings
+    graph [rankdir=LR, bgcolor="white", fontname="Arial"];
+    node [shape=ellipse, style=filled, color=lightblue, fontname="Arial"];
+    edge [color=gray, arrowhead=normal];
+
+    // Core Notions
+    Language [label="Language", color=lightcoral];
+    Mysticism [label="Mysticism", color=lightgoldenrod];
+    Subjectivity [label="Subjectivity", color=lightgreen];
+
+    // Language Subcategories
+    Deconstruction [label="Deconstruction\n(Derrida)"];
+    Semiotics [label="Semiotics\n(Barthes, Eco)"];
+    Interpretation [label="Interpretation\n(Eco)"];
+    Signs [label="Signs and Symbols"];
+    Oulipo [label="The Oulipo\n(Playful Constraints)"];
+    Language -> Deconstruction;
+    Language -> Semiotics;
+    Language -> Interpretation;
+    Language -> Signs;
+    Language -> Oulipo;
+
+    // Mysticism Subcategories
+    Sublime [label="The Sublime"];
+    Transcendence [label="Transcendence"];
+    Phenomenology [label="Phenomenology of Experience\n(Merleau-Ponty)"];
+    Faith [label="Faith and Awe\n(Critchley)"];
+    Art [label="Artistic Transcendence\n(Kandinsky, Blake)"];
+    FormFunction [label="Form and Function"];
+    Mysticism -> Sublime;
+    Mysticism -> Transcendence;
+    Mysticism -> Phenomenology;
+    Mysticism -> Faith;
+    Mysticism -> Art;
+    Mysticism -> FormFunction;
+
+    // Subjectivity Subcategories
+    Fragmentation [label="Fragmentation\n(Levinas)"];
+    Temporality [label="Temporality and Relativity\n(Badiou)"];
+    Liminality [label="Liminality"];
+    Absence [label="Absence"];
+    Borges [label="Labyrinths\n(Borges)"];
+    Situationists [label="The Situationists\n(Sociopolitical Art)"];
+    Subjectivity -> Fragmentation;
+    Subjectivity -> Temporality;
+    Subjectivity -> Liminality;
+    Subjectivity -> Absence;
+    Subjectivity -> Borges;
+    Subjectivity -> Situationists;
+
+    // Art vs. Entertainment (Connecting Mysticism and Subjectivity)
+    ArtEntertainment [label="Art vs. Entertainment"];
+    Mysticism -> ArtEntertainment;
+    Subjectivity -> ArtEntertainment;
+
+    // Meta-Category: Necessity of the Arts
+    Necessity [label="Necessity of the Arts", color=lightgray];
+    Language -> Necessity;
+    Mysticism -> Necessity;
+    Subjectivity -> Necessity;
+
+    // Cross-Connections
+    Language -> Mysticism;
+    Mysticism -> Subjectivity;
+    Subjectivity -> Language;
+}
