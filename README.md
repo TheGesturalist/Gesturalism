@@ -1,7 +1,7 @@
 # Gesturalism
 The first Gesturalist repo
 
-## [Note]
+## [Notes]
 
 ### How to Render It
 1. Commit the file to your GitHub repository.
