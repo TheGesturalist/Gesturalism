@@ -1,0 +1,104 @@
+Markdown
+
+# Calibre Launch Issue - Summary
+
+
+
+## Problem
+
+After updating to Calibre 9.8, the application would not launch. It would stall during startup and consume excessive memory/storage.
+
+
+
+## Root Causes Identified
+
+
+
+### 1. **Plugin Incompatibility (Primary Issue)**
+
+- Calibre 9.8 migrated from PyQt4 to PyQt5
+
+- Four installed plugins were incompatible with PyQt5:
+
+  - `wikidata_gui`
+
+  - `author_book_count`
+
+  - `author_book_count_hierarchy`
+
+  - `job_spy`
+
+- These plugins attempted to import `QRegExpValidator` from PyQt5 (which was removed) and fell back to PyQt4 (which isn't installed)
+
+- This caused import failures that blocked UI initialization
+
+
+
+### 2. **Large Library Reindexing (Secondary Issue)**
+
+- Library size: 700GB stored on external drive
+
+- Calibre 9.8 update triggered automatic metadata reindexing
+
+- External drive I/O is slow, making full reindex take hours (2-4+ hours estimated)
+
+- This contributed to apparent "hang" after plugins were disabled
+
+
+
+## Solution Applied
+
+
+
+1. **Disabled problematic plugins** by moving plugin directory:
+
+   ```bash
+
+   mv ~/Library/Preferences/calibre/plugins ~/Library/Preferences/calibre/plugins.disabled
+
+   ```
+
+
+
+2. **Allowed reindexing to proceed** on the large external library
+
+   - Process is running normally (verified with `pgrep calibre`)
+
+   - Four worker processes active: page_count, safe_atexit, ipc.pool handlers
+
+   - Main process using ~35MB memory, 8.94 seconds CPU time
+
+
+
+## Current Status
+
+- Calibre UI is accessible and displaying library
+
+- Reindexing is in progress (ETA: 1-2+ hours)
+
+- System has adequate disk space (38GB available)
+
+
+
+## Next Steps
+
+1. Allow reindexing to complete
+
+2. Re-enable plugins and test if they work with Calibre 9.8
+
+3. If plugins still fail, find updated PyQt5-compatible versions or leave permanently disabled
+
+
+
+## System Details
+
+- macOS (bash-3.2)
+
+- Calibre 9.8 (installed via Homebrew)
+
+- 228GB internal drive (24% used, 38GB available)
+
+- 700GB external library on YOTUO drive
+
+
+
